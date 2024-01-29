@@ -53,6 +53,7 @@ class Planets(Base):
     terrain = Column(String(250), nullable=False)
     url = Column(String(250), nullable=False)
     favoritos_planets = relationship('favorites', backref = 'planets', lazy = True)
+    people = relationship('People', backref = 'planets', lazy = True)
     
 class Species(Base):
     __tablename__ = 'species'
@@ -152,7 +153,7 @@ class Favorites(Base):
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
-    id_user = Column(Integer, ForeignKey('user.id'))
+    id_user = Column(Integer, ForeignKey('user.id'), nullable=True)
     id_films = Column(Integer, ForeignKey('films.id'))
     id_people = Column(Integer, ForeignKey('people.id'))
     id_planets = Column(Integer, ForeignKey('planets.id'))
